@@ -49,6 +49,19 @@ var stackedbarChar;
 var maxValSemanas = 60;
 var saltoValY = 10;
 
+
+//******** Al seleccionar un nuevo manager, genera las gráficas correspondientes
+function genChartsTareas(managersel) {
+    numElemento = $.inArray(managersel, arrManagers);
+    tarea1_data = resumenSemanasDat[numElemento].tarea1_data;
+    tarea2_data = resumenSemanasDat[numElemento].tarea2_data;
+    tarea3_data = resumenSemanasDat[numElemento].tarea3_data;
+    genSelects(arrManagers, 'selManager', '#spanManagers', managerInicial, "genChartsTareas(this.value)", 'Manager');
+    genSelects(arrSemanas, 'selSemanas', '#spanSemanas', semanaInicial, "genChartDonaTareas(this.value)", 'Sem');
+    genChartDonaTareas(arrSemanas[0]);
+    drawTareasBarras();
+  }
+
 //**** Al seleccionar una semana, genera la gráfica donu*/
 function genChartDonaTareas(semanaSel){
     numElemento = $.inArray(semanaSel, arrSemanas);
@@ -58,10 +71,10 @@ function genChartDonaTareas(semanaSel){
   }
 
 //**** funciones para generar los selects parámetros*/
-function genSelects(valores, idSel, idElemento, eleSelected, funcion){
+function genSelects(valores, idSel, idElemento, eleSelected, funcion, etiqueta){
     var selectGen = '<select id="'+idSel+'" onchange="'+funcion+'">';
-    for(i=0; i<valores.length; i++){
-      selectGen += '<option value="'+valores[i]+'">'+valores[i]+'</option> ';
+    for(i=0; i<valores.length; i++){j=i+1;
+      selectGen += '<option value="'+valores[i]+'">'+etiqueta+j+': '+valores[i]+'</option> ';
     }
     selectGen += '</select>';
     $(idElemento).html(selectGen);
@@ -180,7 +193,7 @@ function drawTareasBarras() {
             }
         }
     });
-    document.getElementById('stacked-bar-traffic-legend').innerHTML = stackedbarChart.generateLegend();
+   // document.getElementById('stacked-bar-traffic-legend').innerHTML = stackedbarChart.generateLegend();
 }
 
 //*******  funciones para el pie */

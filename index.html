@@ -163,22 +163,8 @@
 <script>
 
   window.onload = function () {
-    genSelects(arrManagers, 'selManager', '#spanManagers', managerInicial, "genChartsTareas(this.value)");
-    genSelects(arrSemanas, 'selSemanas', '#spanSemanas', semanaInicial, "genChartDonaTareas(this.value)");
-   // drawTareasDouhg();
-   // drawTareasBarras();
     genChartsTareas(managerInicial)
   };
 
-//******** Al seleccionar un nuevo manager, genera las gráficas correspondientes
-  function genChartsTareas(managersel) {
-    numElemento = $.inArray(managersel, arrManagers);
-    tarea1_data = resumenSemanasDat[numElemento].tarea1_data;
-    tarea2_data = resumenSemanasDat[numElemento].tarea2_data;
-    tarea3_data = resumenSemanasDat[numElemento].tarea3_data;
-    genSelects(arrSemanas, 'selSemanas', '#spanSemanas', semanaInicial, "genChartDonaTareas(this.value)");
-    genChartDonaTareas(arrSemanas[0]);
-    drawTareasBarras();
-  }
 
 </script>
